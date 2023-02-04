@@ -1,4 +1,3 @@
-# %% [code] {"execution":{"iopub.status.busy":"2023-02-03T23:41:53.439078Z","iopub.execute_input":"2023-02-03T23:41:53.439671Z","iopub.status.idle":"2023-02-03T23:41:53.487594Z","shell.execute_reply.started":"2023-02-03T23:41:53.439550Z","shell.execute_reply":"2023-02-03T23:41:53.485756Z"}}
 # This Python 3 environment comes with many helpful analytics libraries installed
 # It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python
 # For example, here's several helpful packages to load
@@ -20,14 +19,14 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 # You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All"
 # You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
 
-# %% [code] {"execution":{"iopub.status.busy":"2023-02-03T23:41:53.489686Z","iopub.execute_input":"2023-02-03T23:41:53.490916Z","iopub.status.idle":"2023-02-03T23:41:53.538174Z","shell.execute_reply.started":"2023-02-03T23:41:53.490870Z","shell.execute_reply":"2023-02-03T23:41:53.536791Z"}}
+
 df = pd.read_csv("/kaggle/input/sms-spam-collection-dataset/spam.csv", encoding='latin-1')
 
-# %% [code] {"execution":{"iopub.status.busy":"2023-02-03T23:41:53.539981Z","iopub.execute_input":"2023-02-03T23:41:53.541181Z","iopub.status.idle":"2023-02-03T23:41:53.568003Z","shell.execute_reply.started":"2023-02-03T23:41:53.541125Z","shell.execute_reply":"2023-02-03T23:41:53.566591Z"}}
+
 df.rename(columns={"v1": "target", "v2": "text"}, inplace=True)
 df['target']
 
-# %% [code] {"execution":{"iopub.status.busy":"2023-02-03T23:41:53.570903Z","iopub.execute_input":"2023-02-03T23:41:53.571301Z","iopub.status.idle":"2023-02-03T23:41:54.196333Z","shell.execute_reply.started":"2023-02-03T23:41:53.571267Z","shell.execute_reply":"2023-02-03T23:41:54.194984Z"}}
+
 from sklearn.preprocessing import LabelEncoder
 
 encoder = LabelEncoder()
@@ -65,7 +64,7 @@ sns.histplot(df[df['target'] == 0]['num_characters'])
 sns.histplot(df[df['target'] == 1]['num_characters'], color='red')
 
 sns.heatmap(df.corr(),annot=True)
-# %% [code] {"execution":{"iopub.status.busy":"2023-02-03T23:41:58.036779Z","iopub.execute_input":"2023-02-03T23:41:58.037683Z","iopub.status.idle":"2023-02-03T23:41:58.058195Z","shell.execute_reply.started":"2023-02-03T23:41:58.037637Z","shell.execute_reply":"2023-02-03T23:41:58.056906Z"}}
+
 from nltk.tokenize import word_tokenize
 
 df['text'] = df['text'].apply(lambda x: x.lower())
@@ -76,7 +75,7 @@ df['text'] = df['text'].apply(lambda x: word_tokenize(x))
 df
 
 
-# %% [code] {"execution":{"iopub.status.busy":"2023-02-03T23:41:59.422328Z","iopub.execute_input":"2023-02-03T23:41:59.422914Z","iopub.status.idle":"2023-02-03T23:41:59.431890Z","shell.execute_reply.started":"2023-02-03T23:41:59.422878Z","shell.execute_reply":"2023-02-03T23:41:59.430433Z"}}
+
 def alnum(text):
     k = []
     for i in text:
@@ -85,14 +84,14 @@ def alnum(text):
     return k
 
 
-# %% [code] {"execution":{"iopub.status.busy":"2023-02-03T23:41:59.433273Z","iopub.execute_input":"2023-02-03T23:41:59.433658Z","iopub.status.idle":"2023-02-03T23:41:59.474545Z","shell.execute_reply.started":"2023-02-03T23:41:59.433625Z","shell.execute_reply":"2023-02-03T23:41:59.473563Z"}}
+
 # remove symbols
 df['text'] = df['text'].apply(lambda x: alnum(x))
 
-# %% [code] {"execution":{"iopub.status.busy":"2023-02-03T23:41:59.475946Z","iopub.execute_input":"2023-02-03T23:41:59.477362Z","iopub.status.idle":"2023-02-03T23:41:59.482806Z","shell.execute_reply.started":"2023-02-03T23:41:59.477312Z","shell.execute_reply":"2023-02-03T23:41:59.481549Z"}}
+
 from nltk.corpus import stopwords
 
-# %% [code] {"execution":{"iopub.status.busy":"2023-02-03T23:41:59.484171Z","iopub.execute_input":"2023-02-03T23:41:59.484533Z","iopub.status.idle":"2023-02-03T23:41:59.527159Z","shell.execute_reply.started":"2023-02-03T23:41:59.484465Z","shell.execute_reply":"2023-02-03T23:41:59.525584Z"}}
+
 # remove stopwords
 
 stop_words = set(stopwords.words('english'))
@@ -239,5 +238,5 @@ print(accuracy_score(y_test, y_pred3))
 print(confusion_matrix(y_test, y_pred3))
 print(precision_score(y_test, y_pred3))
 
-# %% [code]
+
 # votingclassifier, stacking
